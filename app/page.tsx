@@ -120,19 +120,6 @@ function ToolsOverview({ onSelectTool }: { onSelectTool: (id: string) => void })
   );
 }
 
-function ComingSoon({ label }: { label: string }) {
-  return (
-    <div style={{
-      display: "flex", alignItems: "center", justifyContent: "center",
-      height: "100%",
-    }}>
-      <div style={{ textAlign: "center" }}>
-        <p style={{ color: "var(--text-secondary)", fontSize: 16, fontWeight: 600, marginBottom: 8 }}>{label}</p>
-        <p style={{ color: "var(--text-muted)", fontSize: 13 }}>Coming Soon</p>
-      </div>
-    </div>
-  );
-}
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -501,9 +488,6 @@ export default function Home() {
     }
     if (activeTool === "tools") {
       return <ToolsOverview onSelectTool={handleSelectTool} />;
-    }
-    if (activeTool === "current-rms") {
-      return <ComingSoon label="CRM Chatbot" />;
     }
     if (ActiveToolComponent) {
       return <ActiveToolComponent key={chatKey} isActive={true} adminControls={adminControls} />;
