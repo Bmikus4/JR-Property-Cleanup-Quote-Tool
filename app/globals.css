@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/*
+ * JR Property Cleanup Quote Tool — light editorial design system.
+ * White surfaces, dark navy text, blue accents.
+ */
+
+:root {
+  /* Surfaces */
+  --bg: #ffffff;
+  --surface: #f0f6ff;
+  --surface-2: #e8f0fe;
+  --surface-hover: #ddeafd;
+
+  /* Borders / dividers */
+  --border: #d0dff5;
+  --border-strong: #4a90d9;
+  --border-subtle: rgba(26, 58, 92, 0.08);
+
+  /* Text scale */
+  --text-primary: #1a1a2e;
+  --text-secondary: #3a5272;
+  --text-muted: #6b7fa3;
+  --text-faint: #9aabc4;
+
+  /* Brand accent — navy/blue */
+  --accent: #1a3a5c;
+  --accent-hover: #1e4570;
+  --accent-press: #152e4a;
+  --accent-light: #4a90d9;
+  --accent-light-hover: #5aa0e9;
+  --accent-contrast: #ffffff;            /* text on a solid accent fill */
+  --text-on-accent: #ffffff;             /* text on navy accent buttons */
+  --accent-subtle: rgba(74, 144, 217, 0.12);
+  --accent-border: rgba(74, 144, 217, 0.45);
+
+  /* Semantic */
+  --success: #28a745;
+  --warning: #f0ad4e;
+  --danger: #dc3545;
+  --danger-subtle: rgba(220, 53, 69, 0.14);
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+
+  /* Legacy aliases kept so existing var() references stay valid */
+  --color-surface-sidebar: var(--surface);
+  --color-surface-active: var(--accent-subtle);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-elevated: var(--surface-2);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--accent-light);
+  --color-primary-subtle-bg: var(--accent-subtle);
+  --color-border-subtle: var(--border-subtle);
+
+  --fg: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg);
+  color: var(--text-secondary);
+  font-family: var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  /* Nothing on the page itself scrolls or rubber-bands — only the message
+     list does (see .chat-messages). Keeps the shell locked when the keyboard
+     opens on mobile / the installed PWA. */
+  overscroll-behavior: none;
+  position: fixed;
+  inset: 0;
+}
+
+/* ───────────────────────── Typography helpers ───────────────────────── */
+
+/* Eyebrow: small uppercase wide-tracked blue section label */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+.eyebrow .slash { color: var(--accent-light); opacity: 0.7; margin-right: 6px; }
+
+/* Responsive label visibility (e.g. full label on desktop, short on mobile) */
+.only-mobile { display: none; }
+@media (max-width: 768px) {
+  .hide-mobile { display: none; }
+  .only-mobile { display: inline; }
+}
+
+/* Tabular figures for data / numbers / prices */
+.tnum { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace; }
+
+/* ───────────────────────── Surfaces ───────────────────────── */
+
+/*
+ * .frosted-glass is a light surface with a subtle blue tint.
+ */
+.frosted-glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+.login-glass {
+  padding: 48px 56px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* Faint horizontal divider */
+.rule {
+  height: 1px;
+  width: 100%;
+  background: var(--border-strong);
+  border: none;
+}
+
+/* ───────────────────────── Layout primitives ───────────────────────── */
+
+.chat-font { font-size: 15px; }
+.chat-header { padding: 18px 28px; }
+.chat-input-bar { display: flex; padding: 16px 28px; gap: 12px; }
+.chat-messages {
+  padding: 28px;
+  /* The single scrollable region; contain its scroll so it never chains to
+     the locked page shell. */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ───────────────────────── Motion ───────────────────────── */
+
+@keyframes slideUpOut   { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-100%); opacity: 0; } }
+@keyframes slideInFromBottom { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideDownOut { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+@keyframes slideInFromTop    { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeInUp     { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.slide-up-out    { animation: slideUpOut 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.slide-in-bottom { animation: slideInFromBottom 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.slide-down-out  { animation: slideDownOut 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.slide-in-top    { animation: slideInFromTop 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+/* ───────────────────────── Inputs ───────────────────────── */
+
+input::placeholder, textarea::placeholder { color: var(--text-faint); }
+
+.chat-text-input:focus {
+  border-color: var(--accent-light) !important;
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+/* Intro logo lockup */
+.intro-logo { display: flex; flex-direction: column; align-items: center; }
+@media (max-width: 768px) {
+  .intro-logo { transform: scale(0.85); }
+}
+
+
+/* Prevent iOS Safari zoom on input focus (font-size must be >= 16px) */
+@media (max-width: 768px) {
+  input, textarea, select { font-size: 16px !important; }
+}
+
+/* Mobile: seamless full-bleed surfaces */
+@media (max-width: 768px) {
+  .frosted-glass {
+    border: none;
+    border-radius: 0;
+  }
+  .frosted-glass.login-glass {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin: 20px;
+    padding: 36px 28px;
+  }
+  .chat-header { padding: 12px 18px; }
+  .chat-input-bar { padding: 10px 18px; gap: 8px; }
+  .chat-messages { padding: 14px 18px 18px; }
+  .chat-font { font-size: 14px; }
+}
+
+/* Respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Photo upload button in the input bar */
+.photo-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-muted);
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.photo-upload-btn:hover {
+  color: var(--accent-light);
+  background: var(--accent-subtle);
+}

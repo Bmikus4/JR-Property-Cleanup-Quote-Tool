@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JR Property Cleanup mark">
+  <defs>
+    <linearGradient id="jrDrop" x1="6" y1="3" x2="26" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A6FF0"/>
+      <stop offset="1" stop-color="#0F3FB0"/>
+    </linearGradient>
+  </defs>
+  <!-- Droplet body: a teardrop whose peak doubles as a roofline -->
+  <path d="M16 2.5C16 2.5 26.5 14.2 26.5 21.2C26.5 27 21.7 30.5 16 30.5C10.3 30.5 5.5 27 5.5 21.2C5.5 14.2 16 2.5 16 2.5Z" fill="url(#jrDrop)"/>
+  <!-- House nested in the lower bulb: roof + walls -->
+  <path d="M16 14.4L21.4 19.1V25.2H17.9V21.2H14.1V25.2H10.6V19.1L16 14.4Z" fill="#F6F7F9"/>
+  <!-- Water sheen highlight -->
+  <circle cx="11.4" cy="13.2" r="1.7" fill="#7DD3FC" fill-opacity="0.9"/>
+</svg>
